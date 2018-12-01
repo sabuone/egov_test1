@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<decorators defaultdir="/WEB-INF/jsp/decorators">
+	<excludes>
+		<pattern>*.html</pattern>
+	</excludes>
+
+	<decorator name="page" page="page_layout.jsp">
+		<pattern>/*</pattern>
+	</decorator>
+
+	<decorator name="popup" page="popup_layout.jsp">
+		<pattern>/popup.do</pattern>
+	</decorator>
+
+</decorators>

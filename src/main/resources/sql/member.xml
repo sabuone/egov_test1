@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC 
+	"-//iBATIS.com//DTD SQL Map 2.0//EN" 
+	"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Member">
+
+	<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias alias="searchVO" type="com.mhs.service.DefaultVO"/>
+	<typeAlias alias="memberVO" type="com.mhs.service.MemberVO"/>
+
+	<resultMap id="member" class="com.mhs.service.MemberVO">
+		<result property="num" column="num"/>
+		<result property="userId" column="user_id"/>
+		<result property="userName" column="user_name"/>
+		<result property="userPassword" column="user_password"/>
+	</resultMap>
+
+
+	<insert id="memberDAO.insertMember">
+		<![CDATA[
+			INSERT INTO member (user_id, user_name, user_password)
+			VALUES (#userId#, #userName#, #userPassword#)
+		]]>
+	</insert>
+
+	<select id="memberDAO.selectMember" resultMap="member">
+		SELECT num, user_id, user_name, user_password
+		FROM member 
+		WHERE num = #num#
+		LIMIT 1
+	</select>
+	
+	<select id="memberDAO.selectMemberList" parameterClass="searchVO" resultClass="egovMap">
+		SELECT num, user_id, user_name, user_password
+		FROM member
+		WHERE 1 = 1
+		<isEqual prepend="AND" property="searchCondition" compareValue="0">
+			user_id LIKE CONCAT('%',#searchKeyword#,'%')
+		</isEqual>
+		<isEqual prepend="AND" property="searchCondition" compareValue="1">
+			user_name LIKE CONCAT('%',#searchKeyword#,'%')
+		</isEqual>
+		ORDER BY num DESC
+		LIMIT #recordCountPerPage# OFFSET #firstIndex#
+	</select>
+
+	<select id="memberDAO.selectMemberCount" parameterClass="searchVO" resultClass="int">
+		SELECT COUNT(*) cnt
+		FROM member
+		WHERE 1 = 1
+		<isEqual prepend="AND" property="searchCondition" compareValue="0">
+			user_id LIKE CONCAT('%',#searchKeyword#,'%')
+		</isEqual>
+		<isEqual prepend="AND" property="searchCondition" compareValue="1">
+			user_name LIKE CONCAT('%',#searchKeyword#,'%')
+		</isEqual>
+	</select>
+	
+	<delete id="memberDAO.deleteMember">
+		DELETE FROM member WHERE num = #num# LIMIT 1
+	</delete>
+
+	<update id="memberDAO.updateMember" parameterClass="memberVO">
+		UPDATE member 
+		SET user_id = #userId#, user_name = #userName#, user_password = #userPassword# 
+		WHERE num = #num# 
+		LIMIT 1
+	</update>
+
+</sqlMap>
