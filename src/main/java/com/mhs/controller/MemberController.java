@@ -34,11 +34,6 @@ public class MemberController {
 	@Resource(name = "beanValidator")
 	protected DefaultBeanValidator beanValidator;
 	
-	@RequestMapping(value = "/validator.do")
-	protected String getValidator() throws Exception {
-		return "common/validator";
-	}
-	
 	// 목록
 	@RequestMapping(value = "/MemberList.do")
 	public String list(@ModelAttribute("searchVO") DefaultVO searchVO, ModelMap model) throws Exception {

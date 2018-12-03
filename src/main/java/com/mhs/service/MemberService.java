@@ -13,7 +13,9 @@ public interface MemberService {
 	MemberVO selectMember(int num) throws Exception;
 
 	List<?> selectMemberList(DefaultVO vo) throws Exception;
-
+	
+	List<?> selectMemberAllList() throws Exception;
+	
 	int selectMemberCount(DefaultVO vo);
 
 }

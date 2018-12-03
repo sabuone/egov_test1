@@ -49,6 +49,11 @@ public class MemberServiceImpl extends EgovAbstractServiceImpl implements Member
 	public List<?> selectMemberList(DefaultVO vo) throws Exception {
 		return memberDAO.selectMemberList(vo);
 	}
+	
+	@Override
+	public List<?> selectMemberAllList() throws Exception {
+		return memberDAO.selectMemberAllList();
+	}
 
 	@Override
 	public int selectMemberCount(DefaultVO vo) {

@@ -32,6 +32,10 @@ public class MemberDAO extends EgovAbstractDAO {
 		return list("memberDAO.selectMemberList", vo);
 	}
 
+	public List<?> selectMemberAllList() throws Exception{
+		return list("memberDAO.selectMemberAllList");
+	}
+	
 	public int selectMemberCount(DefaultVO vo){
 		return (Integer) select("memberDAO.selectMemberCount", vo);
 	}

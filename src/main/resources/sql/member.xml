@@ -45,6 +45,13 @@
 		LIMIT #recordCountPerPage# OFFSET #firstIndex#
 	</select>
 
+	<select id="memberDAO.selectMemberAllList" resultClass="egovMap">
+		SELECT num, user_id, user_name, user_password
+		FROM member
+		WHERE 1 = 1
+		ORDER BY num DESC
+	</select>
+	
 	<select id="memberDAO.selectMemberCount" parameterClass="searchVO" resultClass="int">
 		SELECT COUNT(*) cnt
 		FROM member

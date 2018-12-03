@@ -1,5 +1,6 @@
 .project
 .classpath
+.springBeans
 .settings/
 bin/
 target/
